@@ -3,8 +3,11 @@ import React from 'react'
 import { useTheme, HStack , Image, Stack, Button} from 'native-base';
 import calculateResponsiveFontSize from '../../utils/font';
 import ButtonComponent from '../../component/ButtonComponent';
+import { useNavigation } from '@react-navigation/native';
+
 const SnapTip= () => {
     const { colors } = useTheme();
+    const navigation = useNavigation()
   
   // Access the color from the theme
   const bgColor = colors.brand.bg;
@@ -17,10 +20,14 @@ const SnapTip= () => {
     <StatusBar backgroundColor={bgColor} barStyle="dark-content" />
     
     <HStack space="3" alignItems="center" h="20" px="5">
+        <TouchableWithoutFeedback onPress={()=>{
+          navigation.goBack()
+        }}>
         <Image
           source={require('../../images/back.png')}
           alt="Alternate Text"
         />
+        </TouchableWithoutFeedback>
         <Text style={[styles.text, { fontSize: calculateResponsiveFontSize(8) }]}>Tip</Text>
       </HStack>
   
@@ -41,7 +48,9 @@ const SnapTip= () => {
     </View>
   
     <Stack my="5" justifyContent="center" h="20" alignItems="center" style={styles.bottomButton}>
-        <ButtonComponent width="80%" text="Done" />
+        <ButtonComponent width="80%" text="Done" onClick={()=>{
+          navigation.navigate('HomeStack')
+        }} />
       </Stack>
   </View>
   

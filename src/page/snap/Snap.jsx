@@ -3,8 +3,12 @@ import React from 'react'
 import { useTheme, HStack , Image, Stack, Button} from 'native-base';
 import calculateResponsiveFontSize from '../../utils/font';
 import ButtonComponent from '../../component/ButtonComponent';
+import { useNavigation } from '@react-navigation/native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+
 const Snap = () => {
     const { colors } = useTheme();
+    const navigation = useNavigation()
   
   // Access the color from the theme
   const bgColor = colors.brand.bg;
@@ -17,10 +21,14 @@ const Snap = () => {
       <StatusBar backgroundColor={bgColor} barStyle="dark-content" />
       <HStack mb="3" space="3" alignItems="center" justifyContent="space-between" style={styles.header}>
       <HStack space="3" alignItems="center">
-      <Image
+    <TouchableOpacity onPress={()=>{
+      navigation.navigate('Explore')
+    }}>
+    <Image
           source={require('../../images/back.png')}
           alt="Alternate Text"
         />
+    </TouchableOpacity>
         <Text style={[styles.text, { fontSize: calculateResponsiveFontSize(8) }]}>Aerial Data</Text>
       </HStack>
         <Image
@@ -43,22 +51,24 @@ const Snap = () => {
       <View style={styles.bottomContainer}>
    <Text style={[styles.head, {fontSize:calculateResponsiveFontSize(9)}]}> Select Object to analyze</Text>
    <HStack flexWrap="wrap" my="4" space="2">
-   <Button bg={bgColor2} px="4">
+   <Button bg={bgColor2} px="4" my="1">
   <Text style={[{fontSize:calculateResponsiveFontSize(5), color:bgColor3}]}>Default Small</Text>
 </Button>
 
-<Button bg="#fff" px="4">
+<Button bg="#fff" px="4"  my="1">
   <Text style={[{fontSize:calculateResponsiveFontSize(5), color:"#000"}]}>Default Small</Text>
 </Button>
-<Button bg="#fff" px="4">
+<Button bg="#fff" px="4"  my="1">
   <Text style={[{fontSize:calculateResponsiveFontSize(5), color:"#000"}]}>Default Small</Text>
 </Button>
-<Button bg="#fff" px="4" my="2">
+<Button bg="#fff" px="4" my="1">
   <Text style={[{fontSize:calculateResponsiveFontSize(5), color:"#000"}]}>Default Small</Text>
 </Button>
    </HStack>
    <Stack justifyContent="center" alignItems="center" w="100%">
-  <ButtonComponent width="80%" text="Analyze" />
+  <ButtonComponent width="80%" text="Analyze" onClick={()=>{
+    navigation.navigate('SnapDetail')
+  }} />
    </Stack>
       </View>
     </View>

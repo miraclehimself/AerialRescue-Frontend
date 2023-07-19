@@ -3,8 +3,11 @@ import React from 'react'
 import { useTheme, HStack , Image, Stack, Button} from 'native-base';
 import calculateResponsiveFontSize from '../../utils/font';
 import ButtonComponent from '../../component/ButtonComponent';
+import { useNavigation } from '@react-navigation/native';
+
 const SnapDetail = () => {
     const { colors } = useTheme();
+    const navigation = useNavigation()
   
   // Access the color from the theme
   const bgColor = colors.brand.bg;
@@ -17,11 +20,15 @@ const SnapDetail = () => {
       <StatusBar backgroundColor={bgColor} barStyle="dark-content" />
     
       <View style={styles.content}>
-        <Image
+       <TouchableWithoutFeedback onPress={()=>{
+        navigation.navigate('Snap')
+       }}>
+       <Image
           source={require('../../images/map.jpeg')}
           alt="map"
           style={styles.image}
         />
+       </TouchableWithoutFeedback>
       <TouchableWithoutFeedback style={styles.imageCancel}>
       <Image
           source={require('../../images/arrowBack.png')}
@@ -39,7 +46,9 @@ const SnapDetail = () => {
 </HStack>
   <HStack justifyContent="center" mt="20%" alignItems="center" w="100%" space="1">
   <Stack  w="80%">
-  <ButtonComponent width="95%" text="Save Analyze" />
+  <ButtonComponent width="95%" text="Save Analyze" onClick={()=>{
+     navigation.navigate('SnapTip')
+  }} />
    </Stack>
      <TouchableWithoutFeedback>
      <Image
